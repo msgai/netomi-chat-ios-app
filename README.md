@@ -54,7 +54,7 @@ Or download the ZIP and open it in Xcode.
 2. Add the SDK in the `Podfile`:
 
 ```ruby
-pod 'NetomiChatSDK', '1.0.0'
+pod 'NetomiChatSDK'
 ```
 
 3. Install:
@@ -102,6 +102,12 @@ In a view controller or SwiftUI view:
 NetomiChat.shared.launch(jwt: nil) { errorData in
     // Handle any errors, e.g., present an alert
 }
+
+OR
+
+NetomiChat.shared.launchWithQuery("YOUR_SEARCH_QUERY_HERE", jwt: nil) { errorData in
+    // Handle any errors, e.g., present an alert
+}
 ```
 
 - `jwt` (optional): Include if you have an authenticated user token.
@@ -113,6 +119,16 @@ You can pass additional user-specific data (e.g., department, user IDs):
 
 ```swift
 NetomiChat.shared.sendCustomParameter(name: "department", value: "marketing")
+
+OR
+
+/// To set/reset custom parameters for attibutes
+func setCustomParameter() {
+    var dict: [String: String] = [:]
+    dict["department"] = "marketing"
+    dict["userID"] = "12345678"
+    NetomiChat.shared.setCustomParameter(dict)
+}
 ```
 
 This helps personalize conversations on the AI Agent side.
@@ -124,23 +140,82 @@ This helps personalize conversations on the AI Agent side.
 In `ViewController` or wherever you configure the chat:
 
 ```swift
-// Customizing the chat header
-NetomiChat.shared.updateHeaderConfiguration(
-    NCWHeaderConfiguration(
-        backgroundColor = "#FFFFFF",
-        tintColor = "#000000",
-        isBackPressPopupEnabled = true
-    )
-)
+/// To send external headers in the APIs
+func updateApiHeaderConfiguration() {
+    var headers: [String: String] = [:]
+    headers["header"] = "value"
+    headers["header1"] = "value1"
+    NetomiChat.shared.updateApiHeaderConfiguration(headers: headers)
+}
 
-// Customizing the chat footer
-NetomiChat.shared.updateFooterConfiguration(
-    NCWFooterConfiguration(
-        backgroundColor = "#F8F8F8",
-        inputBoxBackgroundColor = "#FFFFFF",
-        netomiBrandingText = "Powered by Netomi"
-    )
-)
+/// This public function is used to update header configuration of the chat SDK.
+func updateHeaderConfiguration() {
+    var config: NCWHeaderConfiguration = NCWHeaderConfiguration()
+    config.backgroundColor = .red
+    config.isGradientAppied = true
+    config.isBackPressPopupEnabed = true
+    config.navigationIcon = UIImage.logo
+    /// and so on....
+    NetomiChat.shared.updateHeaderConfiguration(config: config)
+}
+
+/// This public function is used to update footer configuration of the chat SDK.
+func updateFooterConfiguration() {
+    var config: NCWFooterConfiguration = NCWFooterConfiguration()
+    config.backgroundColor = .red
+    config.inputBoxTextColor = .black
+    config.isFooterHidden = false
+    config.isNetomiBrandingEnabled = true
+    /// and so on....
+    NetomiChat.shared.updateFooterConfiguration(config: config)
+}
+
+/// This public function is used to update bot configuration of the chat SDK.
+func updateBotConfiguration() {
+    var config: NCWBotConfiguration = NCWBotConfiguration()
+    config.backgroundColor = .lightGray
+    config.isFeedbackEnabled = true
+    config.quickReplyBackgroundColor = .lightGray
+    config.textColor = .black
+    /// and so on....
+    NetomiChat.shared.updateBotConfiguration(config: config)
+}
+
+/// This public function is used to update user configuration of the chat SDK.
+func updateUserConfiguration() {
+    var config: NCWUserConfiguration = NCWUserConfiguration()
+    config.backgroundColor = .darkGray
+    config.retryColor = .red
+    config.quickReplyBackgroundColor = .darkGray
+    config.textColor = .white
+    /// and so on....
+    NetomiChat.shared.updateUserConfiguration(config: config)
+}
+
+/// This public function is used to update bubble configuration of the chat SDK.
+func updateBubbleConfiguration() {
+    var config: NCWBubbleConfiguration = NCWBubbleConfiguration()
+    config.borderRadius = 20
+    config.timeStampColor = .gray
+    NetomiChat.shared.updateBubbleConfiguration(config: config)
+}
+
+/// This public function is used to update chat window configuration of the chat SDK.
+func updateChatWindowConfiguration() {
+    var config: NCWChatWindowConfiguration = NCWChatWindowConfiguration()
+    config.chatWindowBackgroundColor = .white
+    NetomiChat.shared.updateChatWindowConfiguration(config: config)
+}
+
+/// This public function is used to update other configuration of the chat SDK.
+func updateOtherConfiguration() {
+    var config: NCWOtherConfiguration = NCWOtherConfiguration()
+    config.backgroundColor = .white
+    config.titleColor = .black
+    config.descriptionColor = .black
+    /// and so on....
+    NetomiChat.shared.updateOtherConfiguration(config: config)
+}
 ```
 
 You can modify colors, gradients, branding text, icons, and more.

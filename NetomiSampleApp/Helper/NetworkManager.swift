@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Netomi
 
 final actor NetworkManager {
     
@@ -37,7 +36,6 @@ final actor NetworkManager {
             debugPrint("Request ->", request)
             debugPrint("Request header ->", request.allHTTPHeaderFields as Any)
             debugPrint("Response ->", response)
-            debugPrint("Response json ->", JSON(data))
             guard let httpResponse = response as? HTTPURLResponse else {
                 var error = ErrorData()
                 error.statusMessage = "Invalid response"
