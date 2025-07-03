@@ -44,6 +44,10 @@ class HomeViewController: UIViewController {
         let env: NCWEnvironment = .USProd /// Change it according to your bot environment
         NetomiChat.shared.initialize(botRefId: botRefId, env: env)
         // After initializing the SDK you should call the modifier functions if you want to set properties explicitly.
+        setCustomParameter()
+        setFCMToken()
+        updateHeaderConfiguration()
+        // and so on....
     }
 
     @IBAction func toggleDrawer(_ sender: UIButton) {
@@ -135,28 +139,28 @@ extension HomeViewController {
     
     /// To send custom parameters for attibutes
     func sendCustomParameter() {
-        NetomiChat.shared.sendCustomParameter(name: "key", value: "Value")
+        NetomiChat.shared.sendCustomParameter(name: "department", value: "marketing")
     }
     
     /// To set/reset custom parameters for attibutes
     func setCustomParameter() {
         var dict: [String: String] = [:]
-        dict["key"] = "value"
-        dict["key1"] = "value1"
+        dict["department"] = "marketing"
+        dict["userID"] = "USR-998877"
         NetomiChat.shared.setCustomParameter(dict)
     }
     
     /// To send external headers in the APIs
     func updateApiHeaderConfiguration() {
         var headers: [String: String] = [:]
-        headers["header"] = "value"
-        headers["header1"] = "value1"
+        headers["platform"] = "iOS"
+        headers["authType"] = "JWT"
         NetomiChat.shared.updateApiHeaderConfiguration(headers: headers)
     }
     
     /// To receive the notification related to SDK
     func setFCMToken() {
-        let token: String = "" ///replace it with your push FCM token for notification
+        let token: String = "your_fcm_token" ///replace it with your push FCM token for notification
         NetomiChat.shared.setFCMToken(token)
     }
     
@@ -167,7 +171,7 @@ extension HomeViewController {
         config.isGradientAppied = true
         config.isBackPressPopupEnabed = true
         config.navigationIcon = UIImage.logo
-        /// and so on....
+        // and so on....
         NetomiChat.shared.updateHeaderConfiguration(config: config)
     }
     
@@ -178,7 +182,7 @@ extension HomeViewController {
         config.inputBoxTextColor = .black
         config.isFooterHidden = false
         config.isNetomiBrandingEnabled = true
-        /// and so on....
+        // and so on....
         NetomiChat.shared.updateFooterConfiguration(config: config)
     }
     
@@ -189,7 +193,7 @@ extension HomeViewController {
         config.isFeedbackEnabled = true
         config.quickReplyBackgroundColor = .lightGray
         config.textColor = .black
-        /// and so on....
+        // and so on....
         NetomiChat.shared.updateBotConfiguration(config: config)
     }
     
@@ -200,7 +204,7 @@ extension HomeViewController {
         config.retryColor = .red
         config.quickReplyBackgroundColor = .darkGray
         config.textColor = .white
-        /// and so on....
+        // and so on....
         NetomiChat.shared.updateUserConfiguration(config: config)
     }
     
@@ -225,7 +229,7 @@ extension HomeViewController {
         config.backgroundColor = .white
         config.titleColor = .black
         config.descriptionColor = .black
-        /// and so on....
+        // and so on....
         NetomiChat.shared.updateOtherConfiguration(config: config)
     }
 }

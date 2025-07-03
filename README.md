@@ -28,94 +28,89 @@ The Netomi Mobile Chat SDK makes it easy to embed conversational AI into your iO
 
 This sample app demonstrates the core integration steps and includes code examples for customizing various aspects of the chat UI.
 
+---
+
 ## Prerequisites
+
 - iOS 15 or later
-- Xcode 13 or later
+- Xcode 13+
 - UIKit or SwiftUI (both supported by the SDK)
-- CocoaPods or Swift Package Manager installed/configured
-- Bot Credentials (i.e., botRefId and environment `env`) from Netomi
+- CocoaPods or Swift Package Manager
+- Your Bot Credentials from Netomi (`botRefId`, `env`)
 
-## Setup & Installation
+---
 
-### Clone or Download the Sample
+## Installation
 
-Clone the repository:
+### 1️⃣ CocoaPods
 
-```bash
-git clone https://github.com/msgai/netomi-chat-ios-app.git
-```
+1. Add this to your `Podfile`:
 
-Or download the ZIP and open it in Xcode.
+   ```ruby
+   pod 'NetomiChatSDK', '{{VERSION}}'
+   ```
 
-### Configure the SDK via CocoaPods or SPM
+2. Run:
 
-#### CocoaPods
-1. Navigate to the project folder containing the `Podfile`.
-2. Add the SDK in the `Podfile`:
+   ```bash
+   pod install
+   ```
 
-```ruby
-pod 'NetomiChatSDK'
-```
+3. Open `.xcworkspace` in Xcode.
 
-3. Install:
+---
 
-```bash
-pod install
-```
+### 2️⃣ Swift Package Manager (SPM)
 
-4. Open the generated `.xcworkspace` file in Xcode.
+1. Go to **Xcode > Project > Package Dependencies**
+2. Add:
 
-#### Swift Package Manager (SPM)
-1. Open your Xcode project and go to `Project > Package Dependencies`.
-2. Add a new package using:
+   ```
+   https://github.com/msgai/netomi-chat-ios.git
+   ```
 
-```
-https://github.com/msgai/netomi-chat-ios-app.git
-```
+3. Select tag or branch: `{{VERSION}}`
 
-3. Select the main branch or a version tag, then finish adding.
-4. Build your project to ensure the dependency is resolved.
+4. ✅ Required third-party dependencies (must be added manually via SPM):
+   - AWS IoT Core:
+     ```
+     https://github.com/aws-amplify/aws-sdk-ios-spm.git
+     ```
+     - Select `AWSCore` and `AWSIoT`
 
-## Build & Run
-1. In Xcode, select a simulator or connected device running iOS 15+.
-2. Build (`⌘+B`) and Run (`⌘+R`).
-3. The sample app's main screen will display a button or entry to Launch Chat.
+---
 
-## Sample Code Walkthrough
+## Quick Start
 
-### Initialization
-
-In the sample’s `AppDelegate` or `SceneDelegate` (or wherever you want to initialize the SDK):
+### ✅ Initialize SDK
 
 ```swift
-NetomiChat.shared.initialize(botRefId: "YOUR_BOT_REF_ID", environment: .us)
+NetomiChat.shared.initialize(
+    botRefId: "YOUR_BOT_REF_ID",
+    environment: .USProd
+)
 ```
 
-- `botRefId`: The unique identifier for your AI Agent.
-- `environment`: Use `.us`, `.sg`, `.eu`, `.qa`, `.qaint`, or `.dev` as provided by Netomi.
+> Replace `YOUR_BOT_REF_ID` and choose the environment: `.USProd`, `.SGProd`, `.EUProd`, `.QA`, `.QAInternal`, `.Development`
+---
 
-### Launching the Chat
-
-In a view controller or SwiftUI view:
+### 🚀 Launch Chat
 
 ```swift
-NetomiChat.shared.launch(jwt: nil) { errorData in
-    // Handle any errors, e.g., present an alert
+NetomiChat.shared.launch(jwt: nil) { error in
+    // Handle launch error if any
 }
 
 OR
 
-NetomiChat.shared.launchWithQuery("YOUR_SEARCH_QUERY_HERE", jwt: nil) { errorData in
-    // Handle any errors, e.g., present an alert
+NetomiChat.shared.launchWithQuery("your_search_query", jwt: nil) { errorData in
+    // Handle launch error if any
 }
 ```
 
-- `jwt` (optional): Include if you have an authenticated user token.
-- The optional error callback handles initialization or network errors.
+---
 
-### Sending Custom Parameters
-
-You can pass additional user-specific data (e.g., department, user IDs):
+### 🧩 Send Custom Parameters
 
 ```swift
 NetomiChat.shared.sendCustomParameter(name: "department", value: "marketing")
@@ -123,121 +118,123 @@ NetomiChat.shared.sendCustomParameter(name: "department", value: "marketing")
 OR
 
 /// To set/reset custom parameters for attibutes
-func setCustomParameter() {
-    var dict: [String: String] = [:]
-    dict["department"] = "marketing"
-    dict["userID"] = "12345678"
-    NetomiChat.shared.setCustomParameter(dict)
-}
+var dict: [String: String] = [:]
+dict["department"] = "marketing"
+dict["userID"] = "USR-998877"
+NetomiChat.shared.setCustomParameter(dict)
 ```
 
-This helps personalize conversations on the AI Agent side.
+---
 
-### Customization Examples
-
-#### Header, Footer, and Bubble Styles
-
-In `ViewController` or wherever you configure the chat:
+### 🧩 Send Header Parameters in the APIs
 
 ```swift
-/// To send external headers in the APIs
-func updateApiHeaderConfiguration() {
-    var headers: [String: String] = [:]
-    headers["header"] = "value"
-    headers["header1"] = "value1"
-    NetomiChat.shared.updateApiHeaderConfiguration(headers: headers)
-}
-
-/// This public function is used to update header configuration of the chat SDK.
-func updateHeaderConfiguration() {
-    var config: NCWHeaderConfiguration = NCWHeaderConfiguration()
-    config.backgroundColor = .red
-    config.isGradientAppied = true
-    config.isBackPressPopupEnabed = true
-    config.navigationIcon = UIImage.logo
-    /// and so on....
-    NetomiChat.shared.updateHeaderConfiguration(config: config)
-}
-
-/// This public function is used to update footer configuration of the chat SDK.
-func updateFooterConfiguration() {
-    var config: NCWFooterConfiguration = NCWFooterConfiguration()
-    config.backgroundColor = .red
-    config.inputBoxTextColor = .black
-    config.isFooterHidden = false
-    config.isNetomiBrandingEnabled = true
-    /// and so on....
-    NetomiChat.shared.updateFooterConfiguration(config: config)
-}
-
-/// This public function is used to update bot configuration of the chat SDK.
-func updateBotConfiguration() {
-    var config: NCWBotConfiguration = NCWBotConfiguration()
-    config.backgroundColor = .lightGray
-    config.isFeedbackEnabled = true
-    config.quickReplyBackgroundColor = .lightGray
-    config.textColor = .black
-    /// and so on....
-    NetomiChat.shared.updateBotConfiguration(config: config)
-}
-
-/// This public function is used to update user configuration of the chat SDK.
-func updateUserConfiguration() {
-    var config: NCWUserConfiguration = NCWUserConfiguration()
-    config.backgroundColor = .darkGray
-    config.retryColor = .red
-    config.quickReplyBackgroundColor = .darkGray
-    config.textColor = .white
-    /// and so on....
-    NetomiChat.shared.updateUserConfiguration(config: config)
-}
-
-/// This public function is used to update bubble configuration of the chat SDK.
-func updateBubbleConfiguration() {
-    var config: NCWBubbleConfiguration = NCWBubbleConfiguration()
-    config.borderRadius = 20
-    config.timeStampColor = .gray
-    NetomiChat.shared.updateBubbleConfiguration(config: config)
-}
-
-/// This public function is used to update chat window configuration of the chat SDK.
-func updateChatWindowConfiguration() {
-    var config: NCWChatWindowConfiguration = NCWChatWindowConfiguration()
-    config.chatWindowBackgroundColor = .white
-    NetomiChat.shared.updateChatWindowConfiguration(config: config)
-}
-
-/// This public function is used to update other configuration of the chat SDK.
-func updateOtherConfiguration() {
-    var config: NCWOtherConfiguration = NCWOtherConfiguration()
-    config.backgroundColor = .white
-    config.titleColor = .black
-    config.descriptionColor = .black
-    /// and so on....
-    NetomiChat.shared.updateOtherConfiguration(config: config)
-}
+var headers: [String: String] = [:]
+headers["platform"] = "iOS"
+headers["authType"] = "JWT"
+// and so on....
+NetomiChat.shared.updateApiHeaderConfiguration(headers: headers)
 ```
 
-You can modify colors, gradients, branding text, icons, and more.
+---
 
-## Pass FCM Token
-
-If your sample demonstrates using Firebase Cloud Messaging:
+### 🔔 Set FCM Token (Push Notifications)
 
 ```swift
-NetomiChat.shared.setFCMToken("YOUR_FCM_TOKEN_HERE")
+NetomiChat.shared.setFCMToken("your-fcm-token")
 ```
 
-Ensure Firebase is properly set up in this sample project for push notifications.
+---
 
-## License & Legal
+## 🎨 Customize UI
 
-© 2025 Netomi. All rights reserved. This sample app is for demonstration purposes only. The Netomi Mobile Chat SDK may include its own license terms. Review the LICENSE file in this repository (if available) and refer to official Netomi documentation for detailed legal information.
+### 🎨 Header Customization
+
+```swift
+var config: NCWHeaderConfiguration = NCWHeaderConfiguration()
+config.backgroundColor = .red
+config.isGradientAppied = true
+config.isBackPressPopupEnabed = true
+config.navigationIcon = UIImage.logo
+// and so on....
+NetomiChat.shared.updateHeaderConfiguration(config: config)
+```
+
+### 🎨 Footer Customization
+
+```swift
+var config: NCWFooterConfiguration = NCWFooterConfiguration()
+config.backgroundColor = .red
+config.inputBoxTextColor = .black
+config.isFooterHidden = false
+config.isNetomiBrandingEnabled = true
+// and so on....
+NetomiChat.shared.updateFooterConfiguration(config: config)
+```
+
+### 🎨 Bot Customization
+
+```swift
+var config: NCWBotConfiguration = NCWBotConfiguration()
+config.backgroundColor = .lightGray
+config.isFeedbackEnabled = true
+config.quickReplyBackgroundColor = .lightGray
+config.textColor = .black
+// and so on....
+NetomiChat.shared.updateBotConfiguration(config: config)
+```
+
+### 🎨 User Customization
+
+```swift
+var config: NCWUserConfiguration = NCWUserConfiguration()
+config.backgroundColor = .darkGray
+config.retryColor = .red
+config.quickReplyBackgroundColor = .darkGray
+config.textColor = .white
+// and so on....
+NetomiChat.shared.updateUserConfiguration(config: config)
+```
+
+### 🎨 Bubble Customization
+
+```swift
+var config: NCWBubbleConfiguration = NCWBubbleConfiguration()
+config.borderRadius = 20
+config.timeStampColor = .gray
+NetomiChat.shared.updateBubbleConfiguration(config: config)
+```
+
+### 🎨 Chat Window Customization
+
+```swift
+var config: NCWChatWindowConfiguration = NCWChatWindowConfiguration()
+config.chatWindowBackgroundColor = .white
+NetomiChat.shared.updateChatWindowConfiguration(config: config)
+```
+
+### 🎨 Other Customization
+
+```swift
+var config: NCWOtherConfiguration = NCWOtherConfiguration()
+config.backgroundColor = .white
+config.titleColor = .black
+config.descriptionColor = .black
+// and so on....
+NetomiChat.shared.updateOtherConfiguration(config: config)
+```
+
+---
 
 ## Support
 
-For questions, issues, or feature requests regarding this sample or the Netomi Mobile Chat SDK:
-- Visit [Netomi.com](http://www.netomi.com) for official support.
-- Contact your Netomi representative directly.
+- 📘 Docs: [netomi.com](https://www.netomi.com)
+- 📩 Contact: support@netomi.com
 
-Happy coding!
+---
+
+## License
+
+```
+© 2025 Netomi. All rights reserved. This sample app is for demonstration purposes only. The Netomi Mobile Chat SDK may include its own license terms. Review the LICENSE file in this repository (if available) and refer to official Netomi documentation for detailed legal information.
+```
