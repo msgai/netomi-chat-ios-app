@@ -1,0 +1,158 @@
+PODS:
+  - AWSCore (2.41.0)
+  - AWSIoT (2.41.0):
+    - AWSCore (= 2.41.0)
+  - Firebase/CoreOnly (11.15.0):
+    - FirebaseCore (~> 11.15.0)
+  - Firebase/Messaging (11.15.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 11.15.0)
+  - FirebaseCore (11.15.0):
+    - FirebaseCoreInternal (~> 11.15.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Logger (~> 8.1)
+  - FirebaseCoreInternal (11.15.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+  - FirebaseInstallations (11.15.0):
+    - FirebaseCore (~> 11.15.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - PromisesObjC (~> 2.4)
+  - FirebaseMessaging (11.15.0):
+    - FirebaseCore (~> 11.15.0)
+    - FirebaseInstallations (~> 11.0)
+    - GoogleDataTransport (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Reachability (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - nanopb (~> 3.30910.0)
+  - GoogleDataTransport (10.1.0):
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.1.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.1.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - IQKeyboardCore (1.0.5)
+  - IQKeyboardManagerSwift (8.0.0):
+    - IQKeyboardManagerSwift/Appearance (= 8.0.0)
+    - IQKeyboardManagerSwift/Core (= 8.0.0)
+    - IQKeyboardManagerSwift/IQKeyboardReturnManager (= 8.0.0)
+    - IQKeyboardManagerSwift/IQKeyboardToolbarManager (= 8.0.0)
+    - IQKeyboardManagerSwift/IQTextView (= 8.0.0)
+    - IQKeyboardManagerSwift/Resign (= 8.0.0)
+  - IQKeyboardManagerSwift/Appearance (8.0.0):
+    - IQKeyboardManagerSwift/Core
+  - IQKeyboardManagerSwift/Core (8.0.0):
+    - IQKeyboardNotification
+    - IQTextInputViewNotification
+  - IQKeyboardManagerSwift/IQKeyboardReturnManager (8.0.0):
+    - IQKeyboardReturnManager
+  - IQKeyboardManagerSwift/IQKeyboardToolbarManager (8.0.0):
+    - IQKeyboardManagerSwift/Core
+    - IQKeyboardToolbarManager
+  - IQKeyboardManagerSwift/IQTextView (8.0.0):
+    - IQTextView
+  - IQKeyboardManagerSwift/Resign (8.0.0):
+    - IQKeyboardManagerSwift/Core
+  - IQKeyboardNotification (1.0.3)
+  - IQKeyboardReturnManager (1.0.4):
+    - IQKeyboardCore (= 1.0.5)
+  - IQKeyboardToolbar (1.1.1):
+    - IQKeyboardCore
+    - IQKeyboardToolbar/Core (= 1.1.1)
+  - IQKeyboardToolbar/Core (1.1.1):
+    - IQKeyboardCore
+    - IQKeyboardToolbar/Placeholderable
+  - IQKeyboardToolbar/Placeholderable (1.1.1):
+    - IQKeyboardCore
+  - IQKeyboardToolbarManager (1.1.3):
+    - IQKeyboardToolbar
+    - IQTextInputViewNotification
+  - IQTextInputViewNotification (1.0.8):
+    - IQKeyboardCore
+  - IQTextView (1.0.5):
+    - IQKeyboardToolbar/Placeholderable
+  - nanopb (3.30910.0):
+    - nanopb/decode (= 3.30910.0)
+    - nanopb/encode (= 3.30910.0)
+  - nanopb/decode (3.30910.0)
+  - nanopb/encode (3.30910.0)
+  - NetomiChatSDK (1.1.15):
+    - AWSIoT
+  - PromisesObjC (2.4.0)
+
+DEPENDENCIES:
+  - Firebase/Messaging
+  - IQKeyboardManagerSwift (= 8.0.0)
+  - NetomiChatSDK
+
+SPEC REPOS:
+  trunk:
+    - AWSCore
+    - AWSIoT
+    - Firebase
+    - FirebaseCore
+    - FirebaseCoreInternal
+    - FirebaseInstallations
+    - FirebaseMessaging
+    - GoogleDataTransport
+    - GoogleUtilities
+    - IQKeyboardCore
+    - IQKeyboardManagerSwift
+    - IQKeyboardNotification
+    - IQKeyboardReturnManager
+    - IQKeyboardToolbar
+    - IQKeyboardToolbarManager
+    - IQTextInputViewNotification
+    - IQTextView
+    - nanopb
+    - NetomiChatSDK
+    - PromisesObjC
+
+SPEC CHECKSUMS:
+  AWSCore: ee7594bda3132cde8666328bf9a09d8770c1c100
+  AWSIoT: 186bd5c758b3331f2ad20e52477800ed7316399b
+  Firebase: d99ac19b909cd2c548339c2241ecd0d1599ab02e
+  FirebaseCore: efb3893e5b94f32b86e331e3bd6dadf18b66568e
+  FirebaseCoreInternal: 9afa45b1159304c963da48addb78275ef701c6b4
+  FirebaseInstallations: 317270fec08a5d418fdbc8429282238cab3ac843
+  FirebaseMessaging: 3b26e2cee503815e01c3701236b020aa9b576f09
+  GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
+  IQKeyboardCore: 28c8bf3bcd8ba5aa1570b318cbc4da94b861711e
+  IQKeyboardManagerSwift: 0c6fbbaa2e60739e48d7cf59f25661471a7a3a65
+  IQKeyboardNotification: d7382c4466c5a5adef92c7452ebf861b36050088
+  IQKeyboardReturnManager: 972be48528ce9e7508ab3ab15ac7efac803f17f5
+  IQKeyboardToolbar: d4bdccfb78324aec2f3920659c77bb89acd33312
+  IQKeyboardToolbarManager: 6c693c8478d6327a7ef2107528d29698b3514dbb
+  IQTextInputViewNotification: f5e954d8881fd9808b744e49e024cc0d4bcfe572
+  IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
+  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
+  NetomiChatSDK: 6eeff2167589a9eea72b81ef6188f54c8ac1b6ad
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+
+PODFILE CHECKSUM: 5a48f1f569e2f89dfcd10f07fa04c2374cddc791
+
+COCOAPODS: 1.16.2
